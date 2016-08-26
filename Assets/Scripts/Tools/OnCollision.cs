@@ -14,9 +14,12 @@ public class OnCollision : MonoBehaviour {
     public Conditions condition = Conditions.Enter;
        
     void OnCollisionEnter(Collision col){
+		Debug.LogFormat ("hit! {0}", col.collider.tag);
+
         if( !col.collider.CompareTag(targetTag) ){
             return;
         }
+		Debug.LogFormat ("mesg! {0}", col.collider.tag);
         if( condition == Conditions.Enter || condition == Conditions.Both ){
             OnCollisionEvent.Invoke();
         }
