@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
-public class yourComponent : MonoBehaviour { 
-	void Start() {
-		Debug.Log ("start");
-	}
+public class FirstPersonDie : MonoBehaviour {
 
-	void Update(){
-		Debug.LogFormat ("Time={0}", Time.time);
-	}
+    public UnityEvent OnDieEvent;
+
+    Rigidbody body;
+
+    void Awake(){
+        body = GetComponent<Rigidbody>();
+    }
+
+
+    public void Die(){
+        body.constraints = RigidbodyConstraints.None;
+        body.AddRelativeTorque( Random.onUnitSphere );
+        OnDieEvent.Invoke();
+    }
 }
